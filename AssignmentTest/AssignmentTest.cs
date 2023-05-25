@@ -13,6 +13,42 @@ namespace AssignmentTest
         }
 
         [TestMethod]
+        public void TestOpen()
+        {
+            TreasureChest chest = new TreasureChest(); // default state is Locked.
+            var method = GetMethodByReflection("Open")
+            method.Invoke(chest, null);
+            Assert.AreEqual(TreasureChest.State.Open, chest.CurrentState());
+        }
+
+        [TestMethod]
+        public void TestClose()
+        {
+            TreasureChest chest = new TreasureChest(); // default state is Locked.
+            var method = GetMethodByReflection("Close")
+            method.Invoke(chest, null);
+            Assert.AreEqual(TreasureChest.State.Closed, chest.CurrentState());
+        }
+
+        [TestMethod]
+        public void TestLock()
+        {
+            TreasureChest chest = new TreasureChest(); // default state is Locked.
+            var method = GetMethodByReflection("Lock")
+            method.Invoke(chest, null);
+            Assert.AreEqual(TreasureChest.State.Locked, chest.CurrentState());
+        }
+
+        [TestMethod]
+        public void TestUnLock()
+        {
+            TreasureChest chest = new TreasureChest(); // default state is Locked.
+            var method = GetMethodByReflection("UnLock")
+            method.Invoke(chest, null);
+            Assert.AreEqual(TreasureChest.State.Closed, chest.CurrentState());
+        }
+
+        [TestMethod]
         public void TestManipulate_UnlockAction_StateChangesToClosed()
         {
             TreasureChest chest = new TreasureChest(); // default state is Locked.
@@ -97,7 +133,13 @@ namespace AssignmentTest
             Type chestType = typeof(TreasureChest);
             FieldInfo stateField = chestType.GetField("_state", BindingFlags.NonPublic | BindingFlags.Instance);
             stateField.SetValue(chest, state);
+        }
 
+        private MethodInfo GetMethodByReflection(string methodName)
+        {
+            Type chestType = typeof(TreasureChest);
+            MethodInfo privateMethod = chestType.GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Instance);
+            return privateMethod;
         }
     }
 }
