@@ -2,7 +2,7 @@
 {
     public class TreasureChestException : Exception
     {
-        public TreasureChestException(string message): base(message)
+        public TreasureChestException(string message) : base(message)
         {
 
         }
@@ -41,7 +41,7 @@
                     ValidateState(State.Open);
                     Close();
                     break;
-                case Action.Lock: 
+                case Action.Lock:
                     ValidateState(State.Closed);
                     Lock();
                     break;
@@ -93,11 +93,12 @@
 
         private void ValidateState(State beforeChangedState)
         {
-            if (_state != beforeChangedState) {
+            if (_state != beforeChangedState)
+            {
                 throw new TreasureChestException($"State is not correct. Current state is {_state}.");
             }
         }
-        
+
         public enum State { Open, Closed, Locked };
         public enum Action { Open, Close, Lock, Unlock };
         public enum Material { Oak, RichMahogany, Iron };
