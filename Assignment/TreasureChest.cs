@@ -1,6 +1,14 @@
 ﻿namespace Assignment
 {
-    class TreasureChest
+    public class TreasureChestException : Exception
+    {
+        public TreasureChestException(string message): base(message)
+        {
+
+        }
+    };
+
+    public class TreasureChest
     {
         private State _state = State.Locked;
         private readonly Material _material;
@@ -9,37 +17,68 @@
 
         public TreasureChest()
         {
-            throw new NotImplementedException();
+            _material = Material.Oak;
+            _lockType = LockType.Novice;
+            _lootQuality = LootQuality.Grey;
         }
 
         public TreasureChest(Material material, LockType lockType, LootQuality lootQuality)
         {
-            throw new NotImplementedException();
+            _material = material;
+            _lockType = lockType;
+            _lootQuality = lootQuality;
         }
 
         public State? Manipulate(Action action)
         {
-            throw new NotImplementedException();
+            switch (action)
+            {
+                case Action.Open:
+                    ValidateState(State.Closed);
+                    Open();
+                    break;
+                case Action.Close:
+                    ValidateState(State.Open);
+                    Close();
+                    break;
+                case Action.Lock: 
+                    ValidateState(State.Closed);
+                    Lock();
+                    break;
+                case Action.Unlock:
+                    ValidateState(State.Locked);
+                    Unlock();
+                    break;
+                default:
+                    throw new TreasureChestException($"Cannot handle this action: {action}");
+            }
+
+            return _state;
+        }
+
+        public State CurrentState()
+        {
+            return _state;
         }
 
         private void Unlock()
         {
-            throw new NotImplementedException();
+            _state = State.Closed;
         }
 
         private void Lock()
         {
-            throw new NotImplementedException();
+            _state = State.Locked;
         }
 
         private void Open()
         {
-            throw new NotImplementedException();
+            _state = State.Open;
         }
 
         private void Close()
         {
-            throw new NotImplementedException();
+            _state = State.Closed;
         }
 
         public override string ToString()
@@ -52,6 +91,13 @@
             Console.WriteLine($"Choose from the following properties.\n1.{prop1}\n2.{prop2}\n3.{prop3}");
         }
 
+        private void ValidateState(State beforeChangedState)
+        {
+            if (_state != beforeChangedState) {
+                throw new TreasureChestException($"State is not correct. Current state is {_state}.");
+            }
+        }
+        
         public enum State { Open, Closed, Locked };
         public enum Action { Open, Close, Lock, Unlock };
         public enum Material { Oak, RichMahogany, Iron };
