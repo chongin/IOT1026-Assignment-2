@@ -62,6 +62,9 @@ Submit a link to the GitHub repo containing your code.
 
 ![State Diagram](state-diagram.png)
 
+![New State Diagram](new-state-diagram.png)
+
+
 ## Grading Rubric
 
 ## Results (70%)
