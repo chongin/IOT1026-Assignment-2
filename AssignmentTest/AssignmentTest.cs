@@ -16,7 +16,7 @@ namespace AssignmentTest
         public void TestOpen()
         {
             TreasureChest chest = new TreasureChest(); // default state is Locked.
-            var method = GetMethodByReflection("Open")
+            var method = GetMethodByReflection("Open");
             method.Invoke(chest, null);
             Assert.AreEqual(TreasureChest.State.Open, chest.CurrentState());
         }
@@ -25,7 +25,7 @@ namespace AssignmentTest
         public void TestClose()
         {
             TreasureChest chest = new TreasureChest(); // default state is Locked.
-            var method = GetMethodByReflection("Close")
+            var method = GetMethodByReflection("Close");
             method.Invoke(chest, null);
             Assert.AreEqual(TreasureChest.State.Closed, chest.CurrentState());
         }
@@ -34,7 +34,7 @@ namespace AssignmentTest
         public void TestLock()
         {
             TreasureChest chest = new TreasureChest(); // default state is Locked.
-            var method = GetMethodByReflection("Lock")
+            var method = GetMethodByReflection("Lock");
             method.Invoke(chest, null);
             Assert.AreEqual(TreasureChest.State.Locked, chest.CurrentState());
         }
@@ -43,7 +43,7 @@ namespace AssignmentTest
         public void TestUnLock()
         {
             TreasureChest chest = new TreasureChest(); // default state is Locked.
-            var method = GetMethodByReflection("UnLock")
+            var method = GetMethodByReflection("UnLock");
             method.Invoke(chest, null);
             Assert.AreEqual(TreasureChest.State.Closed, chest.CurrentState());
         }
