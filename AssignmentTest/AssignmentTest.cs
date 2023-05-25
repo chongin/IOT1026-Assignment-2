@@ -12,6 +12,7 @@ namespace AssignmentTest
             Assert.AreNotSame(1, 2);
         }
 
+        [TestMethod]
         public void TestManipulate_UnlockAction_StateChangesToClosed()
         {
             TreasureChest chest = new TreasureChest(); // default state is Locked.
@@ -42,6 +43,7 @@ namespace AssignmentTest
             Assert.AreEqual(TreasureChest.State.Closed, chest.CurrentState());
         }
 
+        [TestMethod]
         public void TestManipulate_LockAction_StateChangesToLocked()
         {
             TreasureChest chest = new TreasureChest();
@@ -52,6 +54,7 @@ namespace AssignmentTest
             Assert.AreEqual(TreasureChest.State.Locked, chest.CurrentState());
         }
 
+        [TestMethod]
         public void TestManipulate_UnLockAction_StateChangesToClosed()
         {
             TreasureChest chest = new TreasureChest();
@@ -62,6 +65,7 @@ namespace AssignmentTest
             Assert.AreEqual(TreasureChest.State.Closed, chest.CurrentState());
         }
 
+        [TestMethod]
         public void TestManipulate_InvalidAction_ThrowsTreasureChestException()
         {
             TreasureChest chest = new TreasureChest();
@@ -69,6 +73,7 @@ namespace AssignmentTest
             Assert.ThrowsException<TreasureChestException>(() => chest.Manipulate((TreasureChest.Action)100));
         }
 
+        [TestMethod]
         public void TestManipulate_InvalidState_OpenAction_WhenStateIsLocked()
         {
             TreasureChest chest = new TreasureChest();
@@ -77,6 +82,7 @@ namespace AssignmentTest
             Assert.ThrowsException<TreasureChestException>(() => chest.Manipulate(TreasureChest.Action.Open));
         }
 
+        [TestMethod]
         public void TestManipulate_InvalidState_LockAction_WhenStateIsOpen()
         {
             TreasureChest chest = new TreasureChest();
