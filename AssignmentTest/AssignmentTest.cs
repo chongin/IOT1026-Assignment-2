@@ -43,7 +43,7 @@ namespace AssignmentTest
         public void TestUnLock()
         {
             TreasureChest chest = new TreasureChest(); // default state is Locked.
-            var method = GetMethodByReflection("UnLock");
+            var method = GetMethodByReflection("Unlock");
             method.Invoke(chest, null);
             Assert.AreEqual(TreasureChest.State.Closed, chest.CurrentState());
         }
